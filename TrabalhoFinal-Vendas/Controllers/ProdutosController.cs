@@ -1,0 +1,50 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using TrabalhoFinal_Vendas.Infrastructure.Entity;
+using TrabalhoFinal_Vendas.Infrastructure.Repository.Interfaces;
+
+namespace TrabalhoFinal_Vendas.Controllers
+{
+    [Produces("application/json")]
+    [Route("api/Produtos")]
+    public class ProdutosController : Controller
+    {
+        private readonly IProdutoRepository _produtoRepository;
+        
+        public ProdutosController(IProdutoRepository produtoRepository)
+        {
+            _produtoRepository = produtoRepository;
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult FindAll()
+        {
+            return Ok(_produtoRepository.FindAll());
+        }
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult Find(int id)
+        {
+            return Ok(_produtoRepository.FindById(id));
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult Add(Produto produto)
+        {
+            return Ok(_produtoRepository.Save(produto));
+        }
+
+        [HttpPut("[action]")]
+        public IActionResult Update(Produto produto)
+        {
+            return Ok(_produtoRepository.Update(produto));
+        }
+
+        [HttpDelete("[action]/{id}")]
+        public IActionResult Delete(int id)
+        {
+            _produtoRepository.Delete(id);
+            return Ok();
+        }
+    }
+}
