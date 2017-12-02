@@ -34,8 +34,15 @@ namespace VendasFeevale.Infrastructure.Repository
             return _dbContext.Usuario.FirstOrDefault(u => u.Id == id);
         }
 
+        public Usuario FindByLogin(string login)
+        {
+            return _dbContext.Usuario.FirstOrDefault(u => u.Login == login);
+        }
+
         public Usuario Save(Usuario entity)
         {
+            entity.Senha = entity.CriptografarSenha();
+
             var user = _dbContext.Usuario.Add(entity);
             _dbContext.SaveChanges();
 

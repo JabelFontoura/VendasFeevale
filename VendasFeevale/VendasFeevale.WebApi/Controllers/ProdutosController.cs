@@ -8,7 +8,7 @@ namespace VendasFeevale_WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Produtos")]
-    [Authorize("Bearer", Roles = "Admin")]
+    [Authorize("Bearer")]
     public class ProdutosController : Controller, IController<Produto>
     {
         private readonly IProdutoRepository _produtoRepository;
@@ -18,31 +18,31 @@ namespace VendasFeevale_WebApi.Controllers
             _produtoRepository = produtoRepository;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet]
         public IActionResult FindAll()
         {
             return Ok(_produtoRepository.FindAll());
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("{id}")]
         public IActionResult FindById(string id)
         {
             return Ok(_produtoRepository.FindById(id));
         }
 
-        [HttpPost("[action]")]
+        [HttpPost]
         public IActionResult Add(Produto produto)
         {
             return Ok(_produtoRepository.Save(produto));
         }
 
-        [HttpPut("[action]")]
+        [HttpPut]
         public IActionResult Update(Produto produto)
         {
             return Ok(_produtoRepository.Update(produto));
         }
 
-        [HttpDelete("[action]/{id}")]
+        [HttpDelete]
         public IActionResult Delete(string id)
         {
             _produtoRepository.Delete(id);

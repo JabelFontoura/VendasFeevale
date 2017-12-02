@@ -18,7 +18,7 @@ using VendasFeevale.Infrastructure.Entities.Enums;
 namespace VendasFeevale_WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Auth")]
+    [Route("Auth")]
     public class AuthController : Controller
     {
         private readonly IUsuarioRepository _usuarioRepository;
@@ -35,11 +35,13 @@ namespace VendasFeevale_WebApi.Controllers
             [FromServices]TokenConfigurations tokenConfigurations)
         {
             bool credenciaisValidas = false;
-            if (usuario != null && !String.IsNullOrWhiteSpace(usuario.Id))
+            Usuario usuarioBase = null;
+            if (usuario != null && !String.IsNullOrWhiteSpace(usuario.Login))
             {
-                var usuarioBase = _usuarioRepository.FindById(usuario.Id);
+                usuario.Senha = usuario.CriptografarSenha();
+                usuarioBase = _usuarioRepository.FindByLogin(usuario.Login);
                 credenciaisValidas = (usuarioBase != null &&
-                    usuario.Id == usuarioBase.Id &&
+                    usuario.Login == usuarioBase.Login &&
                     usuario.Senha == usuarioBase.Senha);
             }
 
@@ -48,16 +50,16 @@ namespace VendasFeevale_WebApi.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                    new Claim(JwtRegisteredClaimNames.UniqueName, usuario.Id),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, usuario.Login),
                 };
 
-                if (usuario.Tipo == Tipo.Admin)
+                if (usuarioBase.Tipo == Tipo.Admin)
                    claims.Add(new Claim(ClaimTypes.Role, "Admin"));
                 else
                     claims.Add(new Claim(ClaimTypes.Role, "Comum"));
 
                 ClaimsIdentity identity = new ClaimsIdentity(
-                    new GenericIdentity(usuario.Id, "Login"),
+                    new GenericIdentity(usuario.Login, "Login"),
                     claims
                 );
 

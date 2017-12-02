@@ -18,23 +18,13 @@ namespace VendasFeevale.Infrastructure.Entity
         public string Email { get; set; }
         public Tipo Tipo { get; set; }
         public string Nome { get; set; }
-        public string Senha
-        { 
-            get
-            {
-                return Senha;
-            }
-            set
-            {
-                Senha = CriptografarSenha(Senha);
-            }
-        }
+        public string Senha { get; set; }
         public ICollection<CabecalhoVenda> CabVenda { get; set; }
 
-        private string CriptografarSenha(string senha)
+        public string CriptografarSenha()
         {
             MD5 md5 = MD5.Create();
-            byte[] inputBytes = Encoding.Default.GetBytes(Email + senha);
+            byte[] inputBytes = Encoding.Default.GetBytes("5483@#$asdui109viu2%$*#$" + Senha);
             byte[] hash = md5.ComputeHash(inputBytes);
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < hash.Length; i++)
