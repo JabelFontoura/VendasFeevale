@@ -42,7 +42,7 @@ namespace VendasFeevale_WebApi.Controllers
             return Ok(_produtoRepository.Update(produto));
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
             _produtoRepository.Delete(id);
