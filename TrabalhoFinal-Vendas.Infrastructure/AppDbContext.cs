@@ -5,7 +5,7 @@ using TrabalhoFinal_Vendas.Infrastructure.Mapping;
 
 namespace TrabalhoFinal_Vendas.Infrastructure
 {
-    public class AppContext: DbContext
+    public class AppDbContext: DbContext
     {
         public virtual DbSet<CabecalhoVenda> CabVenda { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
@@ -16,7 +16,7 @@ namespace TrabalhoFinal_Vendas.Infrastructure
 
         private string ConnectionString;
 
-        public AppContext(string connectionString)
+        public AppDbContext(string connectionString)
         {
             ConnectionString = connectionString;
         }
@@ -31,12 +31,12 @@ namespace TrabalhoFinal_Vendas.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UsuarioMap());
-            modelBuilder.ApplyConfiguration(new CabecalhoVendaMap());
-            modelBuilder.ApplyConfiguration(new CategoriaMap());
-            modelBuilder.ApplyConfiguration(new PrecoMap());
-            modelBuilder.ApplyConfiguration(new DetalheVendaMap());
-            modelBuilder.ApplyConfiguration(new ProdutoMap());
+            //modelBuilder.ApplyConfiguration(new UsuarioMap());
+            //modelBuilder.ApplyConfiguration(new CabecalhoVendaMap());
+            //modelBuilder.ApplyConfiguration(new CategoriaMap());
+            //modelBuilder.ApplyConfiguration(new PrecoMap());
+            //modelBuilder.ApplyConfiguration(new DetalheVendaMap());
+            //modelBuilder.ApplyConfiguration(new ProdutoMap());
         }
     }
 }

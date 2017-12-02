@@ -9,14 +9,14 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
 {
     public class DetalheVendaRepository : IDetalheVendaRespository
     {
-        private readonly AppContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
-        public DetalheVendaRepository(AppContext dbContext)
+        public DetalheVendaRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             _dbContext.DetVenda.Remove(FindById(id));
             _dbContext.SaveChanges();
@@ -27,7 +27,7 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
             return _dbContext.DetVenda.ToList();
         }
 
-        public DetalheVenda FindById(int id)
+        public DetalheVenda FindById(string id)
         {
             return _dbContext.DetVenda.FirstOrDefault(dv => dv.Id == id);
         }

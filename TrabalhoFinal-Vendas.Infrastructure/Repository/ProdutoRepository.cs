@@ -9,14 +9,14 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
 {
     public class ProdutoRepository : IProdutoRepository
     {
-        private readonly AppContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
-        public ProdutoRepository(AppContext dbContext)
+        public ProdutoRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             _dbContext.Produtos.Remove(FindById(id));
             _dbContext.SaveChanges();
@@ -27,7 +27,7 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
             return _dbContext.Produtos.ToList();
         }
 
-        public Produto FindById(int id)
+        public Produto FindById(string id)
         {
             return _dbContext.Produtos.FirstOrDefault(p => p.Id == id);
         }

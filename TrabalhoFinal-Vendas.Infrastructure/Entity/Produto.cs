@@ -11,9 +11,9 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Entity
             Preco = new HashSet<Preco>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Nome { get; set; }
-        public int IdCategoria { get; set; }
+        public string IdCategoria { get; set; }
 
         public Categoria IdCategoriaNavigation { get; set; }
         public ICollection<DetalheVenda> DetVenda { get; set; }

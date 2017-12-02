@@ -10,7 +10,7 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Entity
             Produtos = new HashSet<Produto>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Nome { get; set; }
 
         public ICollection<Produto> Produtos { get; set; }

@@ -11,8 +11,8 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Entity
             DetVenda = new HashSet<DetalheVenda>();
         }
 
-        public int Id { get; set; }
-        public int IdCliente { get; set; }
+        public string Id { get; set; }
+        public string IdCliente { get; set; }
         public DateTime Data { get; set; }
         public string Hora { get; set; }
         public Situacao Situacao { get; set; }

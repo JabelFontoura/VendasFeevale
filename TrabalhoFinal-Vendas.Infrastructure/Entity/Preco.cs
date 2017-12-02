@@ -10,10 +10,10 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Entity
             DetVenda = new HashSet<DetalheVenda>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public double Valor { get; set; }
         public DateTime Data { get; set; }
-        public int IdProduto { get; set; }
+        public string IdProduto { get; set; }
         public DateTime? DataValidade { get; set; }
 
         public Produto IdProdutoNavigation { get; set; }

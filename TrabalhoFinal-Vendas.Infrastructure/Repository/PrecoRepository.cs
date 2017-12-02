@@ -9,14 +9,14 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
 {
     public class PrecoRepository : IPrecoRepository
     {
-        private readonly AppContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
-        public PrecoRepository(AppContext dbContext)
+        public PrecoRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             _dbContext.Preco.Remove(FindById(id));
             _dbContext.SaveChanges();
@@ -27,7 +27,7 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
             return _dbContext.Preco.ToList();
         }
 
-        public Preco FindById(int id)
+        public Preco FindById(string id)
         {
             return _dbContext.Preco.FirstOrDefault(p => p.Id == id);
         }

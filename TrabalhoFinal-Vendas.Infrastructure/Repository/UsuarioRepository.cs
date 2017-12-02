@@ -9,14 +9,14 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly AppContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
-        public UsuarioRepository(AppContext dbContext)
+        public UsuarioRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             var user = FindById(id);
 
@@ -29,7 +29,7 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
             return _dbContext.Usuario.ToList();
         }
 
-        public Usuario FindById(int id)
+        public Usuario FindById(string id)
         {
             return _dbContext.Usuario.FirstOrDefault(u => u.Id == id);
         }

@@ -9,14 +9,14 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
 {
     public class CategoriaRepository : ICategoriaRepository
     {
-        private readonly AppContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
-        public CategoriaRepository(AppContext dbContext)
+        public CategoriaRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             _dbContext.Categoria.Remove(FindById(id));
             _dbContext.SaveChanges();
@@ -27,7 +27,7 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
             return _dbContext.Categoria.ToList();
         }
 
-        public Categoria FindById(int id)
+        public Categoria FindById(string id)
         {
             return _dbContext.Categoria.FirstOrDefault(c => c.Id == id);
         }

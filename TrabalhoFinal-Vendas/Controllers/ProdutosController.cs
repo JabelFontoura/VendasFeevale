@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TrabalhoFinal_Vendas.Infrastructure.Entity;
 using TrabalhoFinal_Vendas.Infrastructure.Repository.Interfaces;
@@ -7,7 +8,8 @@ namespace TrabalhoFinal_Vendas.Controllers
 {
     [Produces("application/json")]
     [Route("api/Produtos")]
-    public class ProdutosController : Controller
+    [Authorize("Bearer", Roles = "Admin")]
+    public class ProdutosController : Controller, IController<Produto>
     {
         private readonly IProdutoRepository _produtoRepository;
         
@@ -23,7 +25,7 @@ namespace TrabalhoFinal_Vendas.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public IActionResult Find(int id)
+        public IActionResult FindById(string id)
         {
             return Ok(_produtoRepository.FindById(id));
         }
@@ -41,7 +43,7 @@ namespace TrabalhoFinal_Vendas.Controllers
         }
 
         [HttpDelete("[action]/{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             _produtoRepository.Delete(id);
             return Ok();

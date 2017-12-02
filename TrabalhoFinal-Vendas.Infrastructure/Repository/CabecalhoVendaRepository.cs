@@ -9,14 +9,14 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
 {
     public class CabecalhoVendaRepository : ICabecalhoVendaRepository
     {
-        private readonly AppContext _db;
+        private readonly AppDbContext _db;
 
-        public CabecalhoVendaRepository(AppContext dbContext)
+        public CabecalhoVendaRepository(AppDbContext dbContext)
         {
             _db = dbContext;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             _db.CabVenda.Remove(FindById(id));
             _db.SaveChanges();
@@ -27,7 +27,7 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
             return _db.CabVenda.ToList();
         }
 
-        public CabecalhoVenda FindById(int id)
+        public CabecalhoVenda FindById(string id)
         {
             return _db.CabVenda.FirstOrDefault(cv => cv.Id == id);
         }

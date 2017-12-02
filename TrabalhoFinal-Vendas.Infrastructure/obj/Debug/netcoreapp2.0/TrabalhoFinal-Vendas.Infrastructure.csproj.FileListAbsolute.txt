@@ -7,3 +7,5 @@ D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\TrabalhoF
 D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\TrabalhoFinal-Vendas.Infrastructure\obj\Debug\netcoreapp2.0\TrabalhoFinal-Vendas.Infrastructure.AssemblyInfo.cs
 D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\TrabalhoFinal-Vendas.Infrastructure\obj\Debug\netcoreapp2.0\TrabalhoFinal-Vendas.Infrastructure.dll
 D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\TrabalhoFinal-Vendas.Infrastructure\obj\Debug\netcoreapp2.0\TrabalhoFinal-Vendas.Infrastructure.pdb
+D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\TrabalhoFinal-Vendas.Infrastructure\bin\Debug\netcoreapp2.0\Microsoft.Extensions.Configuration.dll
+D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\TrabalhoFinal-Vendas.Infrastructure\bin\Debug\netcoreapp2.0\Microsoft.Extensions.Configuration.xml

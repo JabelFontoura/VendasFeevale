@@ -7,9 +7,9 @@ namespace TrabalhoFinal_Vendas.Infrastructure.Repository
     public interface IRepository<T>
     {
         IList<T> FindAll();
-        T FindById(int id);
+        T FindById(string id);
         T Save(T entity);
-        void Delete(int id);
+        void Delete(string id);
         T Update(T entity);
     }
 }
