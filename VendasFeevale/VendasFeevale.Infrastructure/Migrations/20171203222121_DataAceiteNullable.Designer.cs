@@ -12,9 +12,10 @@ using VendasFeevale.Infrastructure.Entities.Enums;
 namespace VendasFeevale.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171203222121_DataAceiteNullable")]
+    partial class DataAceiteNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

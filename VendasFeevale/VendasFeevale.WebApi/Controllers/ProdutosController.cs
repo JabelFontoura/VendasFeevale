@@ -30,6 +30,12 @@ namespace VendasFeevale_WebApi.Controllers
             return Ok(_produtoRepository.FindById(id));
         }
 
+        [HttpGet("categoria/{id}")]
+        public IActionResult Find(string id)
+        {
+            return Ok(_produtoRepository.FindByIdCategoria(id));
+        }
+
         [HttpPost]
         public IActionResult Add(Produto produto)
         {

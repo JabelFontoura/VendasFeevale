@@ -32,6 +32,11 @@ namespace VendasFeevale.Infrastructure.Repository
             return _dbContext.Produtos.FirstOrDefault(p => p.Id == id);
         }
 
+        public Produto FindByIdCategoria(string id)
+        {
+            return _dbContext.Produtos.FirstOrDefault(p => p.IdCategoria == id);
+        }
+
         public Produto Save(Produto entity)
         {
             var produto = _dbContext.Produtos.Add(entity);

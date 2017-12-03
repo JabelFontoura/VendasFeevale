@@ -7,5 +7,6 @@ namespace VendasFeevale.Infrastructure.Repository.Interfaces
 {
     public interface IProdutoRepository : IRepository<Produto>
     {
+        Produto FindByIdCategoria(string id);
     }
 }
