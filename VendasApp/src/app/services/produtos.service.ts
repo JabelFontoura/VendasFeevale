@@ -1,14 +1,14 @@
-import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { IService } from './iservice.interface';
 import { Injectable } from '@angular/core';
 import { Produto } from '../entities/produto.entity';
 import { environment } from '../../environments/environment';
+import { HttpClient } from './http-client.service';
 
 @Injectable()
 export class ProdutosService implements IService<Produto> {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   private apiUrl = `${environment.apiUrl}/usuarios`;
 

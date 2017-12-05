@@ -1,3 +1,5 @@
+import { LocalStorageService } from './services/localstorage.service';
+import { HttpClient } from './services/http-client.service';
 import { HttpModule } from '@angular/http';
 import { ProdutosService } from './services/produtos.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,7 +15,11 @@ import { AppComponent } from './app.component';
     BrowserModule,
     HttpModule
   ],
-  providers: [ProdutosService],
+  providers: [
+    ProdutosService,
+    HttpClient,
+    LocalStorageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
