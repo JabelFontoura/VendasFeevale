@@ -10,7 +10,7 @@ export class ProdutosService implements IService<Produto> {
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = `${environment.apiUrl}/usuarios`;
+  private apiUrl = `${environment.apiUrl}/produtos`;
 
   public findAll(): Observable<Response> {
     return this.http.get(this.apiUrl)

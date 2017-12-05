@@ -1,4 +1,4 @@
-import { Categoria } from '../entities/categoria.entity';
+import { Preco } from '../entities/preco.entity';
 import { Observable } from 'rxjs/Rx';
 import { IService } from './iservice.interface';
 import { Injectable } from '@angular/core';
@@ -6,11 +6,11 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from './http-client.service';
 
 @Injectable()
-export class CategoriasService implements IService<Categoria> {
+export class PrecosService implements IService<Preco> {
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = `${environment.apiUrl}/categorias`;
+  private apiUrl = `${environment.apiUrl}/usuarios`;
 
   public findAll(): Observable<Response> {
     return this.http.get(this.apiUrl)
@@ -24,7 +24,7 @@ export class CategoriasService implements IService<Categoria> {
       .catch(this.handleError);
   }
 
-  public add(entity: Categoria): Observable<Response> {
+  public add(entity: Preco): Observable<Response> {
     return this.http.post(this.apiUrl, entity)
     .map(resp => resp.json())
     .catch(this.handleError);
@@ -34,7 +34,7 @@ export class CategoriasService implements IService<Categoria> {
     return this.delete(`${this.apiUrl}/${id}`);
   }
 
-  public update(entity: Categoria): Observable<Response> {
+  public update(entity: Preco): Observable<Response> {
     return this.http.put(this.apiUrl, entity)
     .map(resp => resp.json())
     .catch(this.handleError);
