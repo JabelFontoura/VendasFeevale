@@ -27,7 +27,7 @@ import { DetalheVendasService } from './services/detalhe-vendas.service';
     CategoriasService,
     PrecosService,
     CabecalhoVendasService,
-    DetalheVendasService
+    DetalheVendasService,
     LocalStorageService
   ],
   bootstrap: [AppComponent]

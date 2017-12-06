@@ -40,6 +40,12 @@ export class UsuariosService implements IService<Usuario> {
     .catch(this.handleError);
   }
 
+  public verifyUser(): Observable<Response> {
+    return this.http.get(`${this.apiUrl}/verify`)
+      .map(resp => resp.json())
+      .catch(this.handleError);
+  }
+
   private handleError (error: Response | any): Observable<Response> {
       return Observable.throw(error || 'Server error');
   }
