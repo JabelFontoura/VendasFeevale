@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { ComumModule } from './components/comum/comum.module';
 import { AppRoutingModule } from './app.routing.module';
 import { AuthModule } from './components/auth/auth.module';
@@ -26,6 +27,7 @@ import { AdminModule } from './components/admin/admin.module';
     AuthModule,
     ComumModule,
     AdminModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [

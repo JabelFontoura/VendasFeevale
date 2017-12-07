@@ -7,7 +7,7 @@ export class LocalStorageService {
   constructor() {}
 
   getAuthToken() {
-    return JSON.parse(localStorage.getItem('authToken'));
+    return localStorage.getItem('authToken');
   }
 
   setAuthToken(token: string) {
