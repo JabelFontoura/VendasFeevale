@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-    { path: '', loadChildren: 'app/captura/analise-credito/analise-credito.module#AnaliseCreditoModule' },
-    { path: 'auth', loadChildren: 'app/captura/captura.module#CapturaModule' },
-    { path: 'admin', loadChildren: 'app/acompanhamento/acompanhamento.module#AcompanhamentoModule' },
-    { path: '**', redirectTo: '' }
+    { path: '', loadChildren: 'app/components/com um/comum.module#ComumModule', pathMatch: 'full'  },
+    { path: 'auth', loadChildren: 'app/components/auth/auth.module#AuthModule', pathMatch: 'full'  },
+    { path: 'admin', loadChildren: 'app/components/admin/admin.module#AdminModule', pathMatch: 'full'  },
+    { path: '', redirectTo: '/', pathMatch: 'full' },
+    { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({

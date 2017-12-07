@@ -1,5 +1,5 @@
+import { Router } from '@angular/router';
 import { UsuariosService } from './services/usuarios.service';
-import { ProdutosService } from './services/produtos.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,13 +10,14 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor(private usuariosService: UsuariosService) { }
+  constructor(
+    private usuariosService: UsuariosService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.usuariosService.verifyUser()
-      .subscribe(resp => {
-        console.log(resp);
-      });
+      .subscribe(result => this.router.navigate(['']), error => this.router.navigate(['/auth']));
   }
 
 }

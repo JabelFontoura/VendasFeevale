@@ -1,3 +1,6 @@
+import { ComumModule } from './components/comum/comum.module';
+import { AppRoutingModule } from './app.routing.module';
+import { AuthModule } from './components/auth/auth.module';
 import { PrecosService } from './services/precos.service';
 import { UsuariosService } from './services/usuarios.service';
 import { LocalStorageService } from './services/localstorage.service';
@@ -11,6 +14,7 @@ import { AppComponent } from './app.component';
 import { CategoriasService } from './services/categorias.service';
 import { CabecalhoVendasService } from './services/cabecalho-vendas.service';
 import { DetalheVendasService } from './services/detalhe-vendas.service';
+import { AdminModule } from './components/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { DetalheVendasService } from './services/detalhe-vendas.service';
   ],
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    AuthModule,
+    ComumModule,
+    AdminModule,
+    AppRoutingModule
   ],
   providers: [
     HttpClient,
@@ -32,4 +40,5 @@ import { DetalheVendasService } from './services/detalhe-vendas.service';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
