@@ -83,6 +83,12 @@ namespace Vendas.WebApi
 
             services.AddMvc();
             services.AddDbContext<AppDbContext>();
+            services.AddCors(o => o.AddPolicy("VendasPolicy", builder =>
+            {
+                builder.WithOrigins("http://localhost:4200")
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,6 +104,7 @@ namespace Vendas.WebApi
             }
 
             app.UseStaticFiles();
+            app.UseCors("VendasPolicy");
 
             app.UseMvc(routes =>
             {

@@ -12558,6 +12558,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "D:\\Classes\\FEEVALE\\Programação para internet IV\\TrabalhoFinal-Vendas\\VendasApi\\Vendas.WebApi\\Vendas.WebApi.csproj",
       "projectName": "Vendas.WebApi",
