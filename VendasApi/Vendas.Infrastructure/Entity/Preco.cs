@@ -7,16 +7,16 @@ namespace Vendas.Infrastructure.Entity
     {
         public Preco()
         {
-            DetVenda = new HashSet<DetalheVenda>();
+            DetalheVendas = new HashSet<DetalheVenda>();
         }
 
         public string Id { get; set; }
         public double Valor { get; set; }
         public DateTime Data { get; set; }
-        public string IdProduto { get; set; }
         public DateTime? DataValidade { get; set; }
 
-        public Produto IdProdutoNavigation { get; set; }
-        public ICollection<DetalheVenda> DetVenda { get; set; }
+        public virtual Produto Produto { get; set; }
+        public virtual ICollection<DetalheVenda> DetalheVendas { get; set; }
+        public virtual string IdProduto { get; internal set; }
     }
 }

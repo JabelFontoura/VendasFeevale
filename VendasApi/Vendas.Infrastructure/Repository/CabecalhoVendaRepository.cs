@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,12 +25,12 @@ namespace Vendas.Infrastructure.Repository
 
         public IList<CabecalhoVenda> FindAll()
         {
-            return _db.CabVenda.ToList();
+            return HandleIncludes();
         }
 
         public CabecalhoVenda FindById(string id)
         {
-            return _db.CabVenda.FirstOrDefault(cv => cv.Id == id);
+            return HandleIncludes().FirstOrDefault(cv => cv.Id == id);
         }
 
         public CabecalhoVenda Save(CabecalhoVenda entity)
@@ -46,6 +47,14 @@ namespace Vendas.Infrastructure.Repository
             _db.SaveChanges();
 
             return cabecalhoVenda.Entity;
+        }
+
+        private IList<CabecalhoVenda> HandleIncludes()
+        {
+            return _db.CabVenda
+                .Include(c => c.Usuario)
+                .Include(c => c.DetalheVendas)
+                .ToList();
         }
     }
 }

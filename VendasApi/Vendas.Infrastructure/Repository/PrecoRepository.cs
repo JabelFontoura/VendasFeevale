@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,12 +25,12 @@ namespace Vendas.Infrastructure.Repository
 
         public IList<Preco> FindAll()
         {
-            return _dbContext.Preco.ToList();
+            return HandleIncludes();
         }
 
         public Preco FindById(string id)
         {
-            return _dbContext.Preco.FirstOrDefault(p => p.Id == id);
+            return HandleIncludes().FirstOrDefault(p => p.Id == id);
         }
 
         public Preco Save(Preco entity)
@@ -46,6 +47,14 @@ namespace Vendas.Infrastructure.Repository
             _dbContext.SaveChanges();
 
             return preco.Entity;
+        }
+
+        private IList<Preco> HandleIncludes()
+        {
+            return _dbContext.Preco
+                .Include(p => p.Produto)
+                .Include(p => p.DetalheVendas)
+                .ToList();
         }
     }
 }

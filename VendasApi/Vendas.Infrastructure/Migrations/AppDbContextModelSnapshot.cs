@@ -34,17 +34,15 @@ namespace Vendas.Infrastructure.Migrations
 
                     b.Property<string>("Hora");
 
-                    b.Property<string>("IdCliente");
-
-                    b.Property<string>("IdClienteNavigationId");
+                    b.Property<string>("IdUsuario");
 
                     b.Property<int>("Situacao");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdClienteNavigationId");
+                    b.HasIndex("IdUsuario");
 
-                    b.ToTable("CabVenda");
+                    b.ToTable("Cab_Venda");
                 });
 
             modelBuilder.Entity("Vendas.Infrastructure.Entity.Categoria", b =>
@@ -64,25 +62,19 @@ namespace Vendas.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("IdCab");
-
-                    b.Property<string>("IdCabNavigationId");
+                    b.Property<string>("IdCabecalhoVenda");
 
                     b.Property<string>("IdPreco");
 
-                    b.Property<string>("IdPrecoNavigationId");
-
                     b.Property<string>("IdProduto");
-
-                    b.Property<string>("IdProdutoNavigationId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCabNavigationId");
+                    b.HasIndex("IdCabecalhoVenda");
 
-                    b.HasIndex("IdPrecoNavigationId");
+                    b.HasIndex("IdPreco");
 
-                    b.HasIndex("IdProdutoNavigationId");
+                    b.HasIndex("IdProduto");
 
                     b.ToTable("DetVenda");
                 });
@@ -98,13 +90,11 @@ namespace Vendas.Infrastructure.Migrations
 
                     b.Property<string>("IdProduto");
 
-                    b.Property<string>("IdProdutoNavigationId");
-
                     b.Property<double>("Valor");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdProdutoNavigationId");
+                    b.HasIndex("IdProduto");
 
                     b.ToTable("Preco");
                 });
@@ -116,13 +106,13 @@ namespace Vendas.Infrastructure.Migrations
 
                     b.Property<string>("IdCategoria");
 
-                    b.Property<string>("IdCategoriaNavigationId");
-
                     b.Property<string>("Nome");
+
+                    b.Property<string>("UrlImagem");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCategoriaNavigationId");
+                    b.HasIndex("IdCategoria");
 
                     b.ToTable("Produtos");
                 });
@@ -149,38 +139,44 @@ namespace Vendas.Infrastructure.Migrations
 
             modelBuilder.Entity("Vendas.Infrastructure.Entity.CabecalhoVenda", b =>
                 {
-                    b.HasOne("Vendas.Infrastructure.Entity.Usuario", "IdClienteNavigation")
-                        .WithMany("CabVenda")
-                        .HasForeignKey("IdClienteNavigationId");
+                    b.HasOne("Vendas.Infrastructure.Entity.Usuario", "Usuario")
+                        .WithMany("CabecalhoVenda")
+                        .HasForeignKey("IdUsuario")
+                        .HasConstraintName("FK_Cab_Venda_Usuario");
                 });
 
             modelBuilder.Entity("Vendas.Infrastructure.Entity.DetalheVenda", b =>
                 {
-                    b.HasOne("Vendas.Infrastructure.Entity.CabecalhoVenda", "IdCabNavigation")
-                        .WithMany("DetVenda")
-                        .HasForeignKey("IdCabNavigationId");
+                    b.HasOne("Vendas.Infrastructure.Entity.CabecalhoVenda", "CabecalhoVenda")
+                        .WithMany("DetalheVendas")
+                        .HasForeignKey("IdCabecalhoVenda")
+                        .HasConstraintName("FK_Det_Venda_Cab_Venda");
 
-                    b.HasOne("Vendas.Infrastructure.Entity.Preco", "IdPrecoNavigation")
-                        .WithMany("DetVenda")
-                        .HasForeignKey("IdPrecoNavigationId");
+                    b.HasOne("Vendas.Infrastructure.Entity.Preco", "Preco")
+                        .WithMany("DetalheVendas")
+                        .HasForeignKey("IdPreco")
+                        .HasConstraintName("FK_Det_Venda_Preco");
 
-                    b.HasOne("Vendas.Infrastructure.Entity.Produto", "IdProdutoNavigation")
-                        .WithMany("DetVenda")
-                        .HasForeignKey("IdProdutoNavigationId");
+                    b.HasOne("Vendas.Infrastructure.Entity.Produto", "Produto")
+                        .WithMany("DetalheVendas")
+                        .HasForeignKey("IdProduto")
+                        .HasConstraintName("FK_Det_Venda_Produtos");
                 });
 
             modelBuilder.Entity("Vendas.Infrastructure.Entity.Preco", b =>
                 {
-                    b.HasOne("Vendas.Infrastructure.Entity.Produto", "IdProdutoNavigation")
+                    b.HasOne("Vendas.Infrastructure.Entity.Produto", "Produto")
                         .WithMany("Preco")
-                        .HasForeignKey("IdProdutoNavigationId");
+                        .HasForeignKey("IdProduto")
+                        .HasConstraintName("FK_Preco_Produtos");
                 });
 
             modelBuilder.Entity("Vendas.Infrastructure.Entity.Produto", b =>
                 {
-                    b.HasOne("Vendas.Infrastructure.Entity.Categoria", "IdCategoriaNavigation")
+                    b.HasOne("Vendas.Infrastructure.Entity.Categoria", "Categoria")
                         .WithMany("Produtos")
-                        .HasForeignKey("IdCategoriaNavigationId");
+                        .HasForeignKey("IdCategoria")
+                        .HasConstraintName("FK_Produtos_Categoria");
                 });
 #pragma warning restore 612, 618
         }

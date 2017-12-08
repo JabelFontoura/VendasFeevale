@@ -42,39 +42,38 @@ namespace Vendas.Infrastructure.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     IdCategoria = table.Column<string>(nullable: true),
-                    IdCategoriaNavigationId = table.Column<string>(nullable: true),
-                    Nome = table.Column<string>(nullable: true)
+                    Nome = table.Column<string>(nullable: true),
+                    UrlImagem = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Produtos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Produtos_Categoria_IdCategoriaNavigationId",
-                        column: x => x.IdCategoriaNavigationId,
+                        name: "FK_Produtos_Categoria",
+                        column: x => x.IdCategoria,
                         principalTable: "Categoria",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CabVenda",
+                name: "Cab_Venda",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     Data = table.Column<DateTime>(nullable: false),
-                    DataAceite = table.Column<DateTime>(nullable: false),
+                    DataAceite = table.Column<DateTime>(nullable: true),
                     DataExpedicao = table.Column<DateTime>(nullable: false),
                     Hora = table.Column<string>(nullable: true),
-                    IdCliente = table.Column<string>(nullable: true),
-                    IdClienteNavigationId = table.Column<string>(nullable: true),
+                    IdUsuario = table.Column<string>(nullable: true),
                     Situacao = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CabVenda", x => x.Id);
+                    table.PrimaryKey("PK_Cab_Venda", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CabVenda_Usuario_IdClienteNavigationId",
-                        column: x => x.IdClienteNavigationId,
+                        name: "FK_Cab_Venda_Usuario",
+                        column: x => x.IdUsuario,
                         principalTable: "Usuario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -88,15 +87,14 @@ namespace Vendas.Infrastructure.Migrations
                     Data = table.Column<DateTime>(nullable: false),
                     DataValidade = table.Column<DateTime>(nullable: true),
                     IdProduto = table.Column<string>(nullable: true),
-                    IdProdutoNavigationId = table.Column<string>(nullable: true),
                     Valor = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Preco", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Preco_Produtos_IdProdutoNavigationId",
-                        column: x => x.IdProdutoNavigationId,
+                        name: "FK_Preco_Produtos",
+                        column: x => x.IdProduto,
                         principalTable: "Produtos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -107,65 +105,62 @@ namespace Vendas.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    IdCab = table.Column<string>(nullable: true),
-                    IdCabNavigationId = table.Column<string>(nullable: true),
+                    IdCabecalhoVenda = table.Column<string>(nullable: true),
                     IdPreco = table.Column<string>(nullable: true),
-                    IdPrecoNavigationId = table.Column<string>(nullable: true),
-                    IdProduto = table.Column<string>(nullable: true),
-                    IdProdutoNavigationId = table.Column<string>(nullable: true)
+                    IdProduto = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DetVenda", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DetVenda_CabVenda_IdCabNavigationId",
-                        column: x => x.IdCabNavigationId,
-                        principalTable: "CabVenda",
+                        name: "FK_Det_Venda_Cab_Venda",
+                        column: x => x.IdCabecalhoVenda,
+                        principalTable: "Cab_Venda",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DetVenda_Preco_IdPrecoNavigationId",
-                        column: x => x.IdPrecoNavigationId,
+                        name: "FK_Det_Venda_Preco",
+                        column: x => x.IdPreco,
                         principalTable: "Preco",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DetVenda_Produtos_IdProdutoNavigationId",
-                        column: x => x.IdProdutoNavigationId,
+                        name: "FK_Det_Venda_Produtos",
+                        column: x => x.IdProduto,
                         principalTable: "Produtos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CabVenda_IdClienteNavigationId",
-                table: "CabVenda",
-                column: "IdClienteNavigationId");
+                name: "IX_Cab_Venda_IdUsuario",
+                table: "Cab_Venda",
+                column: "IdUsuario");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetVenda_IdCabNavigationId",
+                name: "IX_DetVenda_IdCabecalhoVenda",
                 table: "DetVenda",
-                column: "IdCabNavigationId");
+                column: "IdCabecalhoVenda");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetVenda_IdPrecoNavigationId",
+                name: "IX_DetVenda_IdPreco",
                 table: "DetVenda",
-                column: "IdPrecoNavigationId");
+                column: "IdPreco");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetVenda_IdProdutoNavigationId",
+                name: "IX_DetVenda_IdProduto",
                 table: "DetVenda",
-                column: "IdProdutoNavigationId");
+                column: "IdProduto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Preco_IdProdutoNavigationId",
+                name: "IX_Preco_IdProduto",
                 table: "Preco",
-                column: "IdProdutoNavigationId");
+                column: "IdProduto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Produtos_IdCategoriaNavigationId",
+                name: "IX_Produtos_IdCategoria",
                 table: "Produtos",
-                column: "IdCategoriaNavigationId");
+                column: "IdCategoria");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -174,7 +169,7 @@ namespace Vendas.Infrastructure.Migrations
                 name: "DetVenda");
 
             migrationBuilder.DropTable(
-                name: "CabVenda");
+                name: "Cab_Venda");
 
             migrationBuilder.DropTable(
                 name: "Preco");

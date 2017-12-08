@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,12 +25,12 @@ namespace Vendas.Infrastructure.Repository
 
         public IList<DetalheVenda> FindAll()
         {
-            return _dbContext.DetVenda.ToList();
+            return HandleIncludes();
         }
 
         public DetalheVenda FindById(string id)
         {
-            return _dbContext.DetVenda.FirstOrDefault(dv => dv.Id == id);
+            return HandleIncludes().FirstOrDefault(dv => dv.Id == id);
         }
 
         public DetalheVenda Save(DetalheVenda entity)
@@ -46,6 +47,15 @@ namespace Vendas.Infrastructure.Repository
             _dbContext.SaveChanges();
 
             return detVenda.Entity;
+        }
+
+        private IList<DetalheVenda> HandleIncludes()
+        {
+            return _dbContext.DetVenda
+                .Include(d => d.CabecalhoVenda)
+                .Include(d => d.Preco)
+                .Include(d => d.Produto)
+                .ToList();
         }
     }
 }

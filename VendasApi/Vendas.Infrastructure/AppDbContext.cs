@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Vendas.Infrastructure.Entity;
+using Vendas.Infrastructure.Mapping;
 
 namespace Vendas.Infrastructure
 {
@@ -29,12 +30,12 @@ namespace Vendas.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfiguration(new UsuarioMap());
-            //modelBuilder.ApplyConfiguration(new CabecalhoVendaMap());
-            //modelBuilder.ApplyConfiguration(new CategoriaMap());
-            //modelBuilder.ApplyConfiguration(new PrecoMap());
-            //modelBuilder.ApplyConfiguration(new DetalheVendaMap());
-            //modelBuilder.ApplyConfiguration(new ProdutoMap());
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
+            modelBuilder.ApplyConfiguration(new CabecalhoVendaMap());
+            modelBuilder.ApplyConfiguration(new CategoriaMap());
+            modelBuilder.ApplyConfiguration(new PrecoMap());
+            modelBuilder.ApplyConfiguration(new DetalheVendaMap());
+            modelBuilder.ApplyConfiguration(new ProdutoMap());
         }
     }
 }

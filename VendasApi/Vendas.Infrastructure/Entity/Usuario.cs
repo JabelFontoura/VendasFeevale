@@ -10,7 +10,7 @@ namespace Vendas.Infrastructure.Entity
     {
         public Usuario()
         {
-            CabVenda = new HashSet<CabecalhoVenda>();
+            CabecalhoVenda = new HashSet<CabecalhoVenda>();
         }
 
         public string Id { get; set; }
@@ -19,7 +19,7 @@ namespace Vendas.Infrastructure.Entity
         public Tipo Tipo { get; set; }
         public string Nome { get; set; }
         public string Senha { get; set; }
-        public ICollection<CabecalhoVenda> CabVenda { get; set; }
+        public virtual ICollection<CabecalhoVenda> CabecalhoVenda { get; set; }
 
         public string CriptografarSenha()
         {

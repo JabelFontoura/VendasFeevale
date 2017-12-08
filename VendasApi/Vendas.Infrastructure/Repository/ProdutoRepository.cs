@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,17 +25,17 @@ namespace Vendas.Infrastructure.Repository
 
         public IList<Produto> FindAll()
         {
-            return _dbContext.Produtos.ToList();
+            return HandleInclues();
         }
 
         public Produto FindById(string id)
         {
-            return _dbContext.Produtos.FirstOrDefault(p => p.Id == id);
+            return HandleInclues().FirstOrDefault(p => p.Id == id);
         }
 
         public Produto FindByIdCategoria(string id)
         {
-            return _dbContext.Produtos.FirstOrDefault(p => p.IdCategoria == id);
+            return HandleInclues().FirstOrDefault(p => p.Categoria.Id == id);
         }
 
         public Produto Save(Produto entity)
@@ -50,6 +51,14 @@ namespace Vendas.Infrastructure.Repository
             var produto = _dbContext.Update(entity);
 
             return produto.Entity;
+        }
+
+        private IList<Produto> HandleInclues()
+        {
+            return _dbContext.Produtos
+                .Include(p => p.Categoria)
+                .Include(p => p.DetalheVendas)
+                .Include(p => p.Preco).ToList();
         }
     }
 }

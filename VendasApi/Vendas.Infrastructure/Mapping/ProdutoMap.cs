@@ -11,17 +11,8 @@ namespace Vendas.Infrastructure.Mapping
     {
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
-            builder.Property(e => e.Id).HasColumnName("id");
 
-            builder.Property(e => e.IdCategoria).HasColumnName("idCategoria");
-
-            builder.Property(e => e.Nome)
-                .IsRequired()
-                .HasColumnName("nome")
-                .HasMaxLength(50)
-                .IsUnicode(false);
-
-            builder.HasOne(d => d.IdCategoriaNavigation)
+            builder.HasOne(d => d.Categoria)
                 .WithMany(p => p.Produtos)
                 .HasForeignKey(d => d.IdCategoria)
                 .OnDelete(DeleteBehavior.ClientSetNull)

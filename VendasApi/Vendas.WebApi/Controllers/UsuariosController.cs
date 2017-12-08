@@ -25,13 +25,13 @@ namespace Vendas.WebApi.Controllers
             return Ok(_usuarioRepository.Save(usuario));
         }
 
-        [HttpGet("[action]")]
-        public IActionResult Verify()
+        [HttpGet("[action]/{login}")]
+        public IActionResult Verify(string login)
         {
-            return Ok("Usuário autenticado");
+            return Ok(_usuarioRepository.FindByLogin(login));
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
             if (!string.IsNullOrEmpty(id))

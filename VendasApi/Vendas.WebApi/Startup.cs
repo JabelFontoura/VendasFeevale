@@ -81,7 +81,10 @@ namespace Vendas.WebApi
                     .RequireAuthenticatedUser().Build());
             });
 
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(
+                    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
             services.AddDbContext<AppDbContext>();
             services.AddCors(o => o.AddPolicy("VendasPolicy", builder =>
             {
@@ -89,6 +92,7 @@ namespace Vendas.WebApi
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

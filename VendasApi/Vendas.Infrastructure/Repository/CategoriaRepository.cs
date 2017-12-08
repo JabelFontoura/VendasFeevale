@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,12 +25,12 @@ namespace Vendas.Infrastructure.Repository
 
         public IList<Categoria> FindAll()
         {
-            return _dbContext.Categoria.ToList();
+            return HandleIncludes();
         }
 
         public Categoria FindById(string id)
         {
-            return _dbContext.Categoria.FirstOrDefault(c => c.Id == id);
+            return HandleIncludes().FirstOrDefault(c => c.Id == id);
         }
 
         public Categoria Save(Categoria entity)
@@ -46,6 +47,13 @@ namespace Vendas.Infrastructure.Repository
             _dbContext.SaveChanges();
 
             return categoria.Entity;
+        }
+
+        private IList<Categoria> HandleIncludes()
+        {
+            return _dbContext.Categoria
+                .Include(c => c.Produtos)
+                .ToList();
         }
     }
 }

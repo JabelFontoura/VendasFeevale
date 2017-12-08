@@ -13,37 +13,15 @@ namespace Vendas.Infrastructure.Mapping
         {
             builder.ToTable("Cab_Venda");
 
-            builder.Property(e => e.Id).HasColumnName("id");
-
-            builder.Property(e => e.Data)
-                .HasColumnName("data")
-                .HasColumnType("date");
-
-            builder.Property(e => e.DataAceite)
-                .HasColumnName("dataAceite")
-                .HasColumnType("date");
-
-            builder.Property(e => e.DataExpedicao)
-                .HasColumnName("dataExpedicao")
-                .HasColumnType("date");
-
-            builder.Property(e => e.Hora)
-                .IsRequired()
-                .HasColumnName("hora")
-                .HasColumnType("nchar(6)");
-
-            builder.Property(e => e.IdCliente).HasColumnName("idCliente");
-
-            builder.Property(e => e.Situacao)
-                .IsRequired()
-                .HasColumnName("situacao")
-                .HasColumnType("nchar(1)");
-
-            builder.HasOne(d => d.IdClienteNavigation)
-                .WithMany(p => p.CabVenda)
-                .HasForeignKey(d => d.IdCliente)
+            builder.HasOne(d => d.Usuario)
+                .WithMany(p => p.CabecalhoVenda)
+                .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Cab_Venda_Usuario");
+
+            builder.HasMany(d => d.DetalheVendas)
+                .WithOne()
+                .HasForeignKey(d => d.IdCabecalhoVenda);
         }
     }
 }

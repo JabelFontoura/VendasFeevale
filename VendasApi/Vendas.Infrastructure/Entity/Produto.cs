@@ -7,16 +7,17 @@ namespace Vendas.Infrastructure.Entity
     {
         public Produto()
         {
-            DetVenda = new HashSet<DetalheVenda>();
+            DetalheVendas = new HashSet<DetalheVenda>();
             Preco = new HashSet<Preco>();
         }
 
         public string Id { get; set; }
         public string Nome { get; set; }
-        public string IdCategoria { get; set; }
+        public string UrlImagem { get; set; }
 
-        public Categoria IdCategoriaNavigation { get; set; }
-        public ICollection<DetalheVenda> DetVenda { get; set; }
-        public ICollection<Preco> Preco { get; set; }
+        public string IdCategoria { get; set; }
+        public virtual Categoria Categoria { get; set; }
+        public virtual ICollection<DetalheVenda> DetalheVendas { get; set; }
+        public virtual ICollection<Preco> Preco { get; set; }
     }
 }

@@ -11,13 +11,9 @@ namespace Vendas.Infrastructure.Mapping
     {
         public void Configure(EntityTypeBuilder<Categoria> builder)
         {
-            builder.Property(e => e.Id).HasColumnName("id");
-
-            builder.Property(e => e.Nome)
-                .IsRequired()
-                .HasColumnName("nome")
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            builder.HasMany(c => c.Produtos)
+                .WithOne()
+                .HasForeignKey(p => p.IdCategoria);
         }
     }
 }

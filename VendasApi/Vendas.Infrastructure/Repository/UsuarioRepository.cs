@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,17 +27,17 @@ namespace Vendas.Infrastructure.Repository
 
         public IList<Usuario> FindAll()
         {
-            return _dbContext.Usuario.ToList();
+            return HandleIncludes().ToList();
         }
 
         public Usuario FindById(string id)
         {
-            return _dbContext.Usuario.FirstOrDefault(u => u.Id == id);
+            return HandleIncludes().FirstOrDefault(u => u.Id == id);
         }
 
         public Usuario FindByLogin(string login)
         {
-            return _dbContext.Usuario.FirstOrDefault(u => u.Login == login);
+            return HandleIncludes().FirstOrDefault(u => u.Login == login);
         }
 
         public Usuario Save(Usuario entity)
@@ -55,6 +56,13 @@ namespace Vendas.Infrastructure.Repository
             _dbContext.SaveChanges();
 
             return user.Entity;
+        }
+
+        private IList<Usuario> HandleIncludes()
+        {
+            return _dbContext.Usuario
+                .Include(u => u.CabecalhoVenda)
+                .ToList();
         }
     }
 }

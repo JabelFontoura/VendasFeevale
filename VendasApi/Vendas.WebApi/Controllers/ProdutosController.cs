@@ -37,13 +37,13 @@ namespace Vendas.WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Produto produto)
+        public IActionResult Add([FromBody]Produto produto)
         {
             return Ok(_produtoRepository.Save(produto));
         }
 
         [HttpPut]
-        public IActionResult Update(Produto produto)
+        public IActionResult Update([FromBody]Produto produto)
         {
             return Ok(_produtoRepository.Update(produto));
         }

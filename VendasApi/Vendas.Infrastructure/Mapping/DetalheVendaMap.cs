@@ -11,32 +11,20 @@ namespace Vendas.Infrastructure.Mapping
     {
         public void Configure(EntityTypeBuilder<DetalheVenda> builder)
         {
-            builder.ToTable("Det_Venda");
-
-            builder.Property(e => e.Id)
-                .HasColumnName("id")
-                .ValueGeneratedNever();
-
-            builder.Property(e => e.IdCab).HasColumnName("idCab");
-
-            builder.Property(e => e.IdPreco).HasColumnName("idPreco");
-
-            builder.Property(e => e.IdProduto).HasColumnName("idProduto");
-
-            builder.HasOne(d => d.IdCabNavigation)
-                .WithMany(p => p.DetVenda)
-                .HasForeignKey(d => d.IdCab)
+            builder.HasOne(d => d.CabecalhoVenda)
+                .WithMany(p => p.DetalheVendas)
+                .HasForeignKey(d => d.IdCabecalhoVenda)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Det_Venda_Cab_Venda");
 
-            builder.HasOne(d => d.IdPrecoNavigation)
-                .WithMany(p => p.DetVenda)
+            builder.HasOne(d => d.Preco)
+                .WithMany(p => p.DetalheVendas)
                 .HasForeignKey(d => d.IdPreco)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Det_Venda_Preco");
 
-            builder.HasOne(d => d.IdProdutoNavigation)
-                .WithMany(p => p.DetVenda)
+            builder.HasOne(d => d.Produto)
+                .WithMany(p => p.DetalheVendas)
                 .HasForeignKey(d => d.IdProduto)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Det_Venda_Produtos");

@@ -22,7 +22,7 @@ namespace VendasFeevale.WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Categoria entity)
+        public IActionResult Add([FromBody]Categoria entity)
         {
             return Ok(_categoriaRepository.Save(entity));
         }
@@ -47,7 +47,7 @@ namespace VendasFeevale.WebApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(Categoria entity)
+        public IActionResult Update([FromBody]Categoria entity)
         {
             return Ok(_categoriaRepository.Update(entity));
         }

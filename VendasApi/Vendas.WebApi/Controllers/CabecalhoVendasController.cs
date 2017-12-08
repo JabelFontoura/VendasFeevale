@@ -24,7 +24,7 @@ namespace Vendas.WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(CabecalhoVenda entity)
+        public IActionResult Add([FromBody]CabecalhoVenda entity)
         {
             return Ok(_cabecalhoVendaRepository.Save(entity));
         }
@@ -49,7 +49,7 @@ namespace Vendas.WebApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(CabecalhoVenda entity)
+        public IActionResult Update([FromBody]CabecalhoVenda entity)
         {
             return Ok(_cabecalhoVendaRepository.Update(entity));
         }
