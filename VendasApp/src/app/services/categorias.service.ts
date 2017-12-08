@@ -31,7 +31,9 @@ export class CategoriasService implements IService<Categoria> {
   }
 
   public delete(id: string): Observable<Response> {
-    return this.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`)
+      .map(resp => resp.json())
+      .catch(this.handleError);
   }
 
   public update(entity: Categoria): Observable<Response> {

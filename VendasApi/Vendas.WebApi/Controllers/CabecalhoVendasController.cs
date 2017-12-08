@@ -33,7 +33,7 @@ namespace Vendas.WebApi.Controllers
         public IActionResult Delete(string id)
         {
             _cabecalhoVendaRepository.Delete(id);
-            return Ok("Deletado com sucesso");
+            return Ok(new { data = "Deletado" });
         }
 
         [HttpGet]

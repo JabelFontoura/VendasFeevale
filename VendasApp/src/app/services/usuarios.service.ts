@@ -1,3 +1,4 @@
+import { LocalStorageService } from './localstorage.service';
 import { Usuario } from '../entities/usuario.entity';
 import { Observable } from 'rxjs/Rx';
 import { IService } from './iservice.interface';
@@ -8,7 +9,10 @@ import { HttpClient } from './http-client.service';
 @Injectable()
 export class UsuariosService implements IService<Usuario> {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private localStorageService: LocalStorageService
+  ) { }
 
   private apiUrl = `${environment.apiUrl}/usuarios`;
 
@@ -31,7 +35,9 @@ export class UsuariosService implements IService<Usuario> {
   }
 
   public delete(id: string): Observable<Response> {
-    return this.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`)
+      .map(resp => resp.json())
+      .catch(this.handleError);
   }
 
   public update(entity: Usuario): Observable<Response> {
@@ -41,7 +47,9 @@ export class UsuariosService implements IService<Usuario> {
   }
 
   public verifyUser(): Observable<Response> {
-    return this.http.get(`${this.apiUrl}/verify`)
+    const login = this.localStorageService.getLogin();
+
+    return this.http.get(`${this.apiUrl}/verify/${login}`)
       .map(resp => resp.json())
       .catch(this.handleError);
   }

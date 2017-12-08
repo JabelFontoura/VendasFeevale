@@ -31,7 +31,9 @@ export class DetalheVendasService implements IService<DetalheVenda> {
   }
 
   public delete(id: string): Observable<Response> {
-    return this.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`)
+      .map(resp => resp.json())
+      .catch(this.handleError);
   }
 
   public update(entity: DetalheVenda): Observable<Response> {

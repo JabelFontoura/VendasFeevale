@@ -8,7 +8,8 @@ export class Usuario {
   tipo: Tipo;
   nome: string;
   senha: string;
-  cabVenda: CabecalhoVenda[];
+  
+  cabecalhoVenda: CabecalhoVenda[];
 
   constructor() {
     this.id = null,
@@ -17,7 +18,7 @@ export class Usuario {
     this.tipo = null,
     this.nome = null,
     this.senha = null,
-    this.cabVenda = null;
+    this.cabecalhoVenda = null;
   }
 
 }

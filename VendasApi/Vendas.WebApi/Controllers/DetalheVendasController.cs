@@ -31,7 +31,7 @@ namespace VendasFeevale.WebApi.Controllers
         public IActionResult Delete(string id)
         {
             _detalheVendaRespository.Delete(id);
-            return Ok("Deletado com sucesso");
+            return Ok(new { data = "Deletado" });
         }
 
         [HttpGet]

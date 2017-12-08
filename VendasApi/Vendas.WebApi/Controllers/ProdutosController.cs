@@ -52,7 +52,7 @@ namespace Vendas.WebApi.Controllers
         public IActionResult Delete(string id)
         {
             _produtoRepository.Delete(id);
-            return Ok();
+            return Ok(new { data = "Deletado" });
         }
     }
 }

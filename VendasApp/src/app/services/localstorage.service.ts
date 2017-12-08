@@ -6,11 +6,19 @@ export class LocalStorageService {
 
   constructor() {}
 
-  getAuthToken() {
+  getAuthToken(): string {
     return localStorage.getItem('authToken');
   }
 
-  setAuthToken(token: string) {
+  setAuthToken(token: string): void {
     localStorage.setItem('authToken', token);
+  }
+
+  getLogin(): string {
+    return localStorage.getItem('userLogin');
+  }
+
+  setLogin(login: string) {
+    localStorage.setItem('userLogin', login);
   }
 }

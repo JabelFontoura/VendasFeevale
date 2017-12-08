@@ -37,11 +37,11 @@ namespace Vendas.WebApi.Controllers
             if (!string.IsNullOrEmpty(id))
             {
                 _usuarioRepository.Delete(id);
-                return Ok($"{id} detelado.");
+                return Ok(new { data = "Deletado" });
             }
             else
             {
-                return NotFound($"{id} não encontrado.");
+                return Ok(new { data = "Não encontrado" });
             }
         }
 

@@ -31,7 +31,9 @@ export class PrecosService implements IService<Preco> {
   }
 
   public delete(id: string): Observable<Response> {
-    return this.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`)
+      .map(resp => resp.json())
+      .catch(this.handleError);
   }
 
   public update(entity: Preco): Observable<Response> {

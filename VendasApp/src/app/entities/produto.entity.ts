@@ -6,8 +6,19 @@ export class Produto {
   id: string;
   nome: string;
   idCategoria: string;
+  urlImagem: string;
 
-  idCategoriaNavigation: Categoria;
-  detVenda: DetalheVenda[];
+  categoria: Categoria;
+  detalheVendas: DetalheVenda[];
   preco: Preco[];
+
+  constructor() {
+    this.id = null,
+    this.nome = null,
+    this. idCategoria = null,
+    this.urlImagem = null,
+    this.categoria = null,
+    this.detalheVendas = null,
+    this.preco = null;
+  }
 }

@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bordered {
+  border: 1px solid black;
+  border-radius: 10%;
+}
+
+.imagem-icon {
+  width: 50px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.large-center {
+  width: 100%;
+  align-self: center;
+}

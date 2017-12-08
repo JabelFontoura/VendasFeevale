@@ -4,11 +4,11 @@ import { CabecalhoVenda } from './cabecalho-venda.entity';
 
 export class DetalheVenda {
   id: string;
-  idCab: string;
+
+  idCabecalhoVenda: string;
   idProduto: string;
   idPreco: string;
-
-  idCabNavigation: CabecalhoVenda;
-  idPrecoNavigation: Preco;
-  idProdutoNavigation: Produto;
+  cabecalhoVenda: CabecalhoVenda;
+  preco: Preco;
+  produto: Produto;
 }

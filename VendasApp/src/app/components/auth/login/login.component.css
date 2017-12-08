@@ -1,0 +1,14 @@
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centered form {
+  padding: 5%;  
+}
+
+.large {
+  width: 100%;
+}

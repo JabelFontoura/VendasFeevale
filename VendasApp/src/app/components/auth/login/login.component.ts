@@ -1,3 +1,5 @@
+import { Tipo } from '../../../entities/enums/tipo.enum';
+import { UsuariosService } from '../../../services/usuarios.service';
 import { LocalStorageService } from '../../../services/localstorage.service';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
@@ -17,12 +19,28 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private localStorageService: LocalStorageService,
+    private usuariosService: UsuariosService,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.usuario = new Usuario();
-    console.log('atuh')
+
+    if (this.localStorageService.getAuthToken()) {
+      this.definirPath();
+    }
+  }
+
+  definirPath(): void {
+    this.usuariosService.verifyUser().subscribe(result => {
+      const { tipo } = <any> result;
+    
+      if (tipo === Tipo.admin) {
+        this.router.navigate(['/admin']);
+      } else {
+        this.router.navigate(['/loja']);
+      }
+    });
   }
 
   onSubmit(form: FormGroup) {
@@ -32,7 +50,8 @@ export class LoginComponent implements OnInit {
       this.authService.login({ login, senha})
         .subscribe(result => {
           this.localStorageService.setAuthToken(result['accessToken']);
-          this.router.navigate(['loja']);
+          this.localStorageService.setLogin(login);
+          this.definirPath();
         });
     }
   }

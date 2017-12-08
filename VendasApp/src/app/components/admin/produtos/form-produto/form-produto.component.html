@@ -1,0 +1,30 @@
+<h1 class="text-center">Editar Produto</h1>
+
+<div class="container centered bordered">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="form-group" *ngIf="editando">
+        <label for="id">Id</label>
+        <input type="text" class="form-control" name="id" [(ngModel)]="produto.id" [readOnly]="true">
+      </div>
+
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" name="Nome"  placeholder="Teclado" [(ngModel)]="produto.nome">
+      </div>
+
+      <div class="form-group">
+        <label for="imagem">Imagem</label>
+        <input type="text" class="form-control" name="imagem"  placeholder="http://imagem" [(ngModel)]="produto.urlImagem">
+      </div>
+
+      <div class="form-group">
+        <label for="categoria">Categoria</label>
+        <select name="categoria" [(ngModel)]="produto.idCategoria">
+          <option *ngFor="let categoria of categorias" [ngValue]="categoria.id" [selected]="produto.idCategoria === categoria.id">{{categoria.nome}}</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="btn btn-success large-center">Salvar</button>
+    </form>
+  </div>
+  

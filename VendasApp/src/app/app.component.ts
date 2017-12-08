@@ -19,5 +19,4 @@ export class AppComponent implements OnInit {
     this.usuariosService.verifyUser()
       .subscribe(result => this.router.navigate(['']), error => this.router.navigate(['/auth']));
   }
-
 }

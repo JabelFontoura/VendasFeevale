@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container centered bordered">
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <div class="form-group">
       <label for="login">Login</label>
@@ -8,6 +8,6 @@
       <label for="senha">Senha</label>
       <input type="password" class="form-control" name="senha"  placeholder="*****" [(ngModel)]="usuario.senha">
     </div>
-    <button type="submit" class="btn btn-primary">Logar</button>
+    <button type="submit" class="btn btn-primary large">Logar</button>
   </form>
 </div>

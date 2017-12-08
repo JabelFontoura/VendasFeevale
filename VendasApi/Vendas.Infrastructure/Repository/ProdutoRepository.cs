@@ -49,7 +49,7 @@ namespace Vendas.Infrastructure.Repository
         public Produto Update(Produto entity)
         {
             var produto = _dbContext.Update(entity);
-
+            _dbContext.SaveChanges();
             return produto.Entity;
         }
 
