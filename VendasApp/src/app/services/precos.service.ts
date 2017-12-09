@@ -10,7 +10,7 @@ export class PrecosService implements IService<Preco> {
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = `${environment.apiUrl}/usuarios`;
+  private apiUrl = `${environment.apiUrl}/precos`;
 
   public findAll(): Observable<Response> {
     return this.http.get(this.apiUrl)

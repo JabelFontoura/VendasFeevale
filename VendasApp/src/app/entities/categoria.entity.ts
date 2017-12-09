@@ -5,4 +5,10 @@ export class Categoria {
   nome: string;
 
   produtos: Produto[];
+
+  constructor() {
+    this.id = null,
+    this.nome = null,
+    this.produtos = null;
+  }
 }

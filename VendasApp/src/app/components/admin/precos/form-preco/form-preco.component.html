@@ -1,0 +1,24 @@
+<h1 class="text-center">Editar Categoria</h1>
+
+<div class="container centered bordered">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="form-group" *ngIf="editando">
+        <label for="id">Id</label>
+        <input type="text" class="form-control" name="id" [(ngModel)]="preco.id" [readOnly]="true">
+      </div>
+
+      <div class="form-group">
+        <label for="valor">Valor</label>
+        <input type="text" class="form-control" name="valor"  placeholder="500" [(ngModel)]="preco.valor">
+      </div>
+
+      <div class="form-group">
+        <label for="produto">Produto</label>
+        <select name="produto" [(ngModel)]="preco.idProduto">
+          <option *ngFor="let produto of produtos" [ngValue]="produto.id" [selected]="preco.idProduto === produto.id">{{produto.nome}}</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="btn btn-success large-center">Salvar</button>
+    </form>
+  </div>

@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Vendas.WebApi.Controllers;
 using Vendas.Infrastructure.Entity;
 using Vendas.Infrastructure.Repository.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VendasFeevale.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/DetalheVendas")]
+    [Authorize("Bearer")]
     public class DetalheVendasController : Controller, IController<DetalheVenda>
     {
         private readonly IDetalheVendaRespository _detalheVendaRespository;

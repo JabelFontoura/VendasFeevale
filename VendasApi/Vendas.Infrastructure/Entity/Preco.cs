@@ -17,6 +17,6 @@ namespace Vendas.Infrastructure.Entity
 
         public virtual Produto Produto { get; set; }
         public virtual ICollection<DetalheVenda> DetalheVendas { get; set; }
-        public virtual string IdProduto { get; internal set; }
+        public virtual string IdProduto { get; set; }
     }
 }
