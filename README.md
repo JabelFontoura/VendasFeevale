@@ -2,8 +2,8 @@
 
 Usuários default:
 
-  Login: comum<space><space>
-  Senha: comum<space><space>
+Login: comum
+Senha: comum
   
-  Login: admin
-  Senha: admin
+Login: admin
+Senha: admin
