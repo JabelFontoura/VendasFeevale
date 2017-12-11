@@ -33,13 +33,14 @@ export class LoginComponent implements OnInit {
 
   definirPath(): void {
     this.usuariosService.verifyUser().subscribe(result => {
-      const { tipo } = <any> result;
-    
+      const { tipo, id } = <any> result;
+
       if (tipo === Tipo.admin) {
         this.router.navigate(['/admin']);
       } else {
         this.router.navigate(['/loja']);
       }
+      this.localStorageService.setIdUsuario(id);
     });
   }
 
@@ -52,6 +53,7 @@ export class LoginComponent implements OnInit {
           this.localStorageService.setAuthToken(result['accessToken']);
           this.localStorageService.setLogin(login);
           this.definirPath();
+          window.location.reload();
         });
     }
   }

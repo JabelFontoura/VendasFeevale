@@ -7,5 +7,6 @@ namespace Vendas.Infrastructure.Repository.Interfaces
 {
     public interface IDetalheVendaRespository : IRepository<DetalheVenda>
     {
+        IList<DetalheVenda> FindByIdCabecalhoVenda(string id);
     }
 }

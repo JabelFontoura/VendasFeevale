@@ -1,1 +1,36 @@
-<router-outlet></router-outlet>
+<div class="container with-margin">
+    <nav class="navbar navbar-default" *ngIf="router.url !== '/auth'">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Loja da Humildade</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" *ngIf="usuario.tipo === 1">
+              <li [routerLinkActive]="['active']"><a routerLink="loja/carrinho">Carrinho</a></li>
+              <li [routerLinkActive]="['active']"><a routerLink="loja/produtos">Produtos</a></li>
+              <li [routerLinkActive]="['active']"><a routerLink="loja/categorias">Categorias</a></li>
+            </ul>
+            <ul class="nav navbar-nav" *ngIf="usuario.tipo === 0">
+              <li [routerLinkActive]="['active']"><a routerLink="admin/pedidos">Pedidos</a></li>
+              <li [routerLinkActive]="['active']"><a routerLink="admin/produtos">Produtos</a></li>
+              <li [routerLinkActive]="['active']"><a routerLink="admin/categorias">Categorias</a></li>
+              <li [routerLinkActive]="['active']"><a routerLink="admin/precos">Precos</a></li>
+              <li [routerLinkActive]="['active']"><a routerLink="admin/usuarios">Usuarios</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active">Bem Vindo(a) {{usuario.nome}}</li>
+              <li>
+                <button type="button" class="btn btn-primary" style="margin-left: 15px;" (click)="logOff()">LogOff</button>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+      <router-outlet></router-outlet>
+</div>

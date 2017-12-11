@@ -26,11 +26,11 @@ namespace Vendas.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Data");
+                    b.Property<DateTime?>("Data");
 
                     b.Property<DateTime?>("DataAceite");
 
-                    b.Property<DateTime>("DataExpedicao");
+                    b.Property<DateTime?>("DataExpedicao");
 
                     b.Property<string>("Hora");
 

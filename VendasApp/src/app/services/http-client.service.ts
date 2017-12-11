@@ -8,7 +8,7 @@ export class HttpClient {
   constructor(private http: Http, private localStorageService: LocalStorageService) {}
 
   createAuthorizationHeader(headers: Headers) {
-    headers.append('Authorization', `Bearer ${this.localStorageService.getAuthToken()}` );
+    headers.append('Authorization', `Bearer ${this.localStorageService.getAuthToken()}`);
   }
 
   get(url) {

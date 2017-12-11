@@ -61,9 +61,9 @@ namespace Vendas.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    Data = table.Column<DateTime>(nullable: false),
+                    Data = table.Column<DateTime>(nullable: true),
                     DataAceite = table.Column<DateTime>(nullable: true),
-                    DataExpedicao = table.Column<DateTime>(nullable: false),
+                    DataExpedicao = table.Column<DateTime>(nullable: true),
                     Hora = table.Column<string>(nullable: true),
                     IdUsuario = table.Column<string>(nullable: true),
                     Situacao = table.Column<int>(nullable: false)

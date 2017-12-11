@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Vendas.WebApi.Controllers;
 using Vendas.Infrastructure.Entity;
 using Vendas.Infrastructure.Repository.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VendasFeevale.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Categorias")]
+    [Authorize("Bearer")]
     public class CategoriasController : Controller, IController<Categoria>
     {
         private readonly ICategoriaRepository _categoriaRepository;
@@ -21,17 +23,27 @@ namespace VendasFeevale.WebApi.Controllers
             _categoriaRepository = categoriaRepository;
         }
 
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpPost]
         public IActionResult Add([FromBody]Categoria entity)
         {
-            return Ok(_categoriaRepository.Save(entity));
+            if (ModelState.IsValid)
+                return Ok(_categoriaRepository.Save(entity));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            _categoriaRepository.Delete(id);
-            return Ok(new { data = "Deletado" });
+            if (ModelState.IsValid)
+            {
+                _categoriaRepository.Delete(id);
+                return Ok(new { data = "Deletado" });
+            }
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
         [HttpGet]
@@ -43,13 +55,20 @@ namespace VendasFeevale.WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult FindById(string id)
         {
-            return Ok(_categoriaRepository.FindById(id));
+            if (ModelState.IsValid)
+                return Ok(_categoriaRepository.FindById(id));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpPut]
         public IActionResult Update([FromBody]Categoria entity)
         {
-            return Ok(_categoriaRepository.Update(entity));
+            if (ModelState.IsValid)
+                return Ok(_categoriaRepository.Update(entity));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
     }
 }

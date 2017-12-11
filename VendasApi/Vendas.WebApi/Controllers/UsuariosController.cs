@@ -7,7 +7,7 @@ namespace Vendas.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    [Authorize("Bearer", Roles = "Admin")]
+    [Authorize("Bearer")]
     public class UsuariosController : Controller, IController<Usuario>
     {
 
@@ -22,26 +22,34 @@ namespace Vendas.WebApi.Controllers
         [AllowAnonymous]
         public IActionResult Add([FromBody]Usuario usuario)
         {
-            return Ok(_usuarioRepository.Save(usuario));
+            if (ModelState.IsValid)
+                return Ok(_usuarioRepository.Save(usuario));
+            else
+                return BadRequest(new { error = "Request Inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin, Comum")]
         [HttpGet("[action]/{login}")]
         public IActionResult Verify(string login)
         {
-            return Ok(_usuarioRepository.FindByLogin(login));
+            if (ModelState.IsValid)
+                return Ok(_usuarioRepository.FindByLogin(login));
+            else
+                return BadRequest(new { error = "Request Inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            if (!string.IsNullOrEmpty(id))
+            if (ModelState.IsValid)
             {
                 _usuarioRepository.Delete(id);
                 return Ok(new { data = "Deletado" });
             }
             else
             {
-                return Ok(new { data = "Não encontrado" });
+                return BadRequest(new { error = "Request Inválido" });
             }
         }
 
@@ -54,13 +62,20 @@ namespace Vendas.WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult FindById(string id)
         {
-            return Ok(_usuarioRepository.FindById(id));
+            if (ModelState.IsValid)
+                return Ok(_usuarioRepository.FindById(id));
+            else
+                return BadRequest(new { error = "Request Inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpPut]
-        public IActionResult Update(Usuario entity)
+        public IActionResult Update([FromBody]Usuario entity)
         {
-            return Ok(_usuarioRepository.Update(entity));
+            if (ModelState.IsValid)
+                return Ok(_usuarioRepository.Update(entity));
+            else
+                return BadRequest(new { error = "Request Inválido" });
         }
     }
 }

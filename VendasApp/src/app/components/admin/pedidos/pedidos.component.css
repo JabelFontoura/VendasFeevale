@@ -1,0 +1,9 @@
+.imagem.icon { 
+  width: 30px;
+}
+
+.menu-button {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}

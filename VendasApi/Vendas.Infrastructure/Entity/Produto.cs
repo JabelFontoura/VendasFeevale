@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Vendas.Infrastructure.Entity
 {
@@ -17,7 +18,8 @@ namespace Vendas.Infrastructure.Entity
 
         public string IdCategoria { get; set; }
         public virtual Categoria Categoria { get; set; }
-        public virtual ICollection<DetalheVenda> DetalheVendas { get; set; }
+
         public virtual ICollection<Preco> Preco { get; set; }
+        public virtual ICollection<DetalheVenda> DetalheVendas { get; set; }
     }
 }

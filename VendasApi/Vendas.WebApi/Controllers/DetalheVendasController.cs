@@ -26,14 +26,23 @@ namespace VendasFeevale.WebApi.Controllers
         [HttpPost]
         public IActionResult Add([FromBody]DetalheVenda entity)
         {
-            return Ok(_detalheVendaRespository.Save(entity));
+            if (ModelState.IsValid)
+                return Ok(_detalheVendaRespository.Save(entity));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            _detalheVendaRespository.Delete(id);
-            return Ok(new { data = "Deletado" });
+            if (ModelState.IsValid)
+            {
+                _detalheVendaRespository.Delete(id);
+                return Ok(new { data = "Deletado" });
+            }
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
         [HttpGet]
@@ -45,13 +54,29 @@ namespace VendasFeevale.WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult FindById(string id)
         {
-            return Ok(_detalheVendaRespository.FindById(id));
+            if (ModelState.IsValid)
+                return Ok(_detalheVendaRespository.FindById(id));
+            else
+                return BadRequest(new { error = "Request inválido" });
+        }
+
+        [HttpGet("cabecalhoVenda/{id}")]
+        public IActionResult FindByIdCabecalhoVenda(string id)
+        {
+            var teste = _detalheVendaRespository.FindByIdCabecalhoVenda(id);
+            if (ModelState.IsValid)
+                return Ok(_detalheVendaRespository.FindByIdCabecalhoVenda(id));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
         [HttpPut]
         public IActionResult Update([FromBody]DetalheVenda entity)
         {
-            return Ok(_detalheVendaRespository.Update(entity));
+            if (ModelState.IsValid)
+                return Ok(_detalheVendaRespository.Update(entity));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
     }
 }

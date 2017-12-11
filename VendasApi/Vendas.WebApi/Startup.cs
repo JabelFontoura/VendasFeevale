@@ -96,7 +96,14 @@ namespace Vendas.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IHostingEnvironment env, 
+            AppDbContext context, 
+            IUsuarioRepository usuarioRepository, 
+            ICategoriaRepository categoriaRepository, 
+            IProdutoRepository produtoRepository
+            )
         {
             if (env.IsDevelopment())
             {
@@ -120,6 +127,8 @@ namespace Vendas.WebApi
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            DbInitializer.Initialize(context, usuarioRepository, categoriaRepository, produtoRepository);
         }
     }
 }

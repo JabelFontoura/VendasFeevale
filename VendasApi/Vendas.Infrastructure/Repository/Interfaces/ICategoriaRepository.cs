@@ -7,5 +7,6 @@ namespace Vendas.Infrastructure.Repository.Interfaces
 {
     public interface ICategoriaRepository : IRepository<Categoria>
     {
+        Categoria FindByNome(string nome);
     }
 }

@@ -24,7 +24,8 @@ namespace Vendas.Infrastructure
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=JABEL-NOTE\SQLEXPRESS;Database=Vendas_Feevale;Trusted_Connection=True;");
+                //optionsBuilder.UseSqlServer(@"Server=JABEL-NOTE\SQLEXPRESS;Database=Vendas_Feevale;Trusted_Connection=True;");
+                optionsBuilder.UseSqlite("Data Source=Vendas.db");
             }
         }
 

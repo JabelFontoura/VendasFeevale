@@ -20,18 +20,28 @@ namespace Vendas.WebApi.Controllers
         {
             _precoRepository = precoRepository;
         }
-
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpPost]
         public IActionResult Add([FromBody]Preco entity)
         {
-            return Ok(_precoRepository.Save(entity));
+            if (ModelState.IsValid)
+                return Ok(_precoRepository.Save(entity));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            _precoRepository.Delete(id);
-            return Ok(new { data = "Deletado" });
+            if (ModelState.IsValid)
+            {
+                _precoRepository.Delete(id);
+                return Ok(new { data = "Deletado" });
+
+            }
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
         [HttpGet]
@@ -43,13 +53,20 @@ namespace Vendas.WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult FindById(string id)
         {
-            return Ok(_precoRepository.FindById(id));
+            if (ModelState.IsValid)
+                return Ok(_precoRepository.FindById(id));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpPut]
         public IActionResult Update([FromBody]Preco entity)
         {
-            return Ok(_precoRepository.Update(entity));
+            if (ModelState.IsValid)
+                return Ok(_precoRepository.Update(entity));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
     }
 }

@@ -1,3 +1,4 @@
+import { Situacao } from '../entities/enums/situacao.enum';
 import { Observable } from 'rxjs/Rx';
 import { IService } from './iservice.interface';
 import { Injectable } from '@angular/core';
@@ -10,7 +11,7 @@ export class CabecalhoVendasService implements IService<CabecalhoVenda> {
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = `${environment.apiUrl}/usuarios`;
+  private apiUrl = `${environment.apiUrl}/cabecalhoVendas`;
 
   public findAll(): Observable<Response> {
     return this.http.get(this.apiUrl)
@@ -20,6 +21,18 @@ export class CabecalhoVendasService implements IService<CabecalhoVenda> {
 
   public findById(id: string): Observable<Response> {
     return this.http.get(`${this.apiUrl}/${id}`)
+      .map(resp => resp.json())
+      .catch(this.handleError);
+  }
+
+  public findByIdUsuarioAndSituacao(id: string, s: Situacao): Observable<Response> {
+    return this.http.get(`${this.apiUrl}/usuario/${id}/${this.mapSituacao(s)}`)
+      .map(resp => resp.json())
+      .catch(this.handleError);
+  }
+
+  public findByIdUsuario(id: string): Observable<Response> {
+    return this.http.get(`${this.apiUrl}/usuario/${id}`)
       .map(resp => resp.json())
       .catch(this.handleError);
   }
@@ -44,5 +57,16 @@ export class CabecalhoVendasService implements IService<CabecalhoVenda> {
 
   private handleError (error: Response | any): Observable<Response> {
       return Observable.throw(error || 'Server error');
+  }
+
+  private mapSituacao(s: Situacao): string {
+    switch (s) {
+      case 0:
+        return 'pendente';
+      case 1:
+        return 'aprovado';
+      case 3:
+        return 'reprovado';
+    }
   }
 }

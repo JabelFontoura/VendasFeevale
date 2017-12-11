@@ -5034,6 +5034,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.SQLite": "2.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.1"
         },
         "compile": {

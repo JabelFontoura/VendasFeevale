@@ -33,6 +33,11 @@ namespace Vendas.Infrastructure.Repository
             return HandleIncludes().FirstOrDefault(c => c.Id == id);
         }
 
+        public Categoria FindByNome(string nome)
+        {
+            return HandleIncludes().FirstOrDefault(c => c.Nome == nome);
+        }
+
         public Categoria Save(Categoria entity)
         {
             var categoria = _dbContext.Categoria.Add(entity);

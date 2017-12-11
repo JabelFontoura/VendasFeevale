@@ -16,3 +16,5 @@ D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\VendasApi
 D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\VendasApi\Vendas.Infrastructure\obj\Debug\netcoreapp2.0\Vendas.Infrastructure.AssemblyInfo.cs
 D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\VendasApi\Vendas.Infrastructure\obj\Debug\netcoreapp2.0\Vendas.Infrastructure.dll
 D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\VendasApi\Vendas.Infrastructure\obj\Debug\netcoreapp2.0\Vendas.Infrastructure.pdb
+D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\VendasApi\Vendas.Infrastructure\bin\Debug\netcoreapp2.0\Newtonsoft.Json.dll
+D:\Classes\FEEVALE\Programação para internet IV\TrabalhoFinal-Vendas\VendasApi\Vendas.Infrastructure\bin\Debug\netcoreapp2.0\Newtonsoft.Json.xml

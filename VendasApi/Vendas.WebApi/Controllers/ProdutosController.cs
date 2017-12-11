@@ -8,7 +8,6 @@ namespace Vendas.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Produtos")]
-    [Authorize("Bearer")]
     public class ProdutosController : Controller, IController<Produto>
     {
         private readonly IProdutoRepository _produtoRepository;
@@ -18,41 +17,64 @@ namespace Vendas.WebApi.Controllers
             _produtoRepository = produtoRepository;
         }
 
+        [Authorize("Bearer", Roles = "Admin, Comum")]
         [HttpGet]
         public IActionResult FindAll()
         {
             return Ok(_produtoRepository.FindAll());
         }
 
+        [Authorize("Bearer", Roles = "Admin, Comum")]
         [HttpGet("{id}")]
         public IActionResult FindById(string id)
         {
-            return Ok(_produtoRepository.FindById(id));
+            if (ModelState.IsValid)
+                return Ok(_produtoRepository.FindById(id));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin, Comum")]
         [HttpGet("categoria/{id}")]
-        public IActionResult Find(string id)
+        public IActionResult FindByIdCategoria(string id)
         {
-            return Ok(_produtoRepository.FindByIdCategoria(id));
+            if (ModelState.IsValid)
+                return Ok(_produtoRepository.FindByIdCategoria(id));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpPost]
         public IActionResult Add([FromBody]Produto produto)
         {
-            return Ok(_produtoRepository.Save(produto));
+            if (ModelState.IsValid)
+                return Ok(_produtoRepository.Save(produto));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpPut]
         public IActionResult Update([FromBody]Produto produto)
         {
-            return Ok(_produtoRepository.Update(produto));
+            if (ModelState.IsValid)
+                return Ok(_produtoRepository.Update(produto));
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
 
+        [Authorize("Bearer", Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            _produtoRepository.Delete(id);
-            return Ok(new { data = "Deletado" });
+            if (ModelState.IsValid)
+            {
+                _produtoRepository.Delete(id);
+                return Ok(new { data = "Deletado" });
+            }
+            else
+                return BadRequest(new { error = "Request inválido" });
         }
     }
 }

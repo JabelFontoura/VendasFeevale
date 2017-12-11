@@ -12,10 +12,10 @@ namespace Vendas.Infrastructure.Entity
         }
 
         public string Id { get; set; }
-        public DateTime Data { get; set; }
+        public DateTime? Data { get; set; }
         public string Hora { get; set; }
         public Situacao Situacao { get; set; }
-        public DateTime DataExpedicao { get; set; }
+        public DateTime? DataExpedicao { get; set; }
         public DateTime? DataAceite { get; set; }
 
         public virtual Usuario Usuario { get; set; }

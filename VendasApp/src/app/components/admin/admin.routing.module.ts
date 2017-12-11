@@ -1,3 +1,4 @@
+import { PedidosComponent } from '../admin/pedidos/pedidos.component';
 import { ProdutosComponent } from './produtos/produtos.component';
 import { FormProdutoComponent } from './produtos/form-produto/form-produto.component';
 
@@ -10,6 +11,8 @@ import { FormPrecoComponent } from './precos/form-preco/form-preco.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { FormUsuarioComponent } from './usuarios/form-usuario/form-usuario.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -26,6 +29,11 @@ const routes: Routes = [
     { path: 'admin/precos/novo', component: FormPrecoComponent, pathMatch: 'full' },
     { path: 'admin/precos/editar/:id', component: FormPrecoComponent, pathMatch: 'full' },
 
+    { path: 'admin/usuarios', component: UsuariosComponent, pathMatch: 'full' },
+    { path: 'admin/usuarios/novo', component: FormUsuarioComponent, pathMatch: 'full' },
+    { path: 'admin/usuarios/editar/:id', component: FormUsuarioComponent, pathMatch: 'full' },
+
+    { path: 'admin/pedidos', component: PedidosComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

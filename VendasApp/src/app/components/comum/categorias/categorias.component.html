@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div class="col-md-12">
+      <div class="col-md-2" style="margin-left: 5%;"></div>
+      <div class="col-md-8">
+        <a routerLink="/loja/carrinho">
+          <button type="button" class="btn btn-default menu-button large-center">
+            ({{this.pedido.detalheVendas.length || '0' }})
+            Carrinho
+          </button>
+        </a>
+        <button type="button" class="btn btn-default menu-button large-center" *ngIf="!odernadoCrescente" (click)="ordenar('crescente')">
+          Ordenar por Valor crescente
+        </button>
+        <button type="button" class="btn btn-default menu-button large-center" *ngIf="odernadoCrescente" (click)="ordenar('decrescente')">
+            Ordenar por Valor decrescente
+          </button>
+      </div>
+    </div>
+  
+    <div class="col-md-12" *ngFor="let categoria of categorias">
+      <h3>{{categoria.nome}}</h3>
+      <div class="col-md-3 card" *ngFor="let produto of categoria.produtos">
+        <div class="col-md-12 center">
+          <img [src]="produto.urlImagem" alt="Imagem do produto {{produto.nome}}" class="img-produto">
+        </div>
+        <div class="col-md-12 center ">
+          <span class="descricao">{{produto.nome}}</span>
+          <br>
+          <span class="descricao">R$ {{produto.preco[0]?.valor}}</span>
+          <button type="button" class="btn btn-primary" (click)="adicionar(produto.id)">Adicionar</button>
+        </div>
+      </div>
+    </div>
+  </div>

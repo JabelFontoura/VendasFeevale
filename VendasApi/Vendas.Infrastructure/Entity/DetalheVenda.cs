@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Vendas.Infrastructure.Entity
 {
@@ -9,9 +11,10 @@ namespace Vendas.Infrastructure.Entity
 
         public virtual CabecalhoVenda CabecalhoVenda { get; set; }
         public virtual Preco Preco { get; set; }
+
         public virtual Produto Produto { get; set; }
         public virtual string IdCabecalhoVenda { get; set; }
-        public virtual string IdPreco { get; internal set; }
-        public virtual string IdProduto { get; internal set; }
+        public virtual string IdPreco { get; set; }
+        public virtual string IdProduto { get; set; }
     }
 }

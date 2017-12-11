@@ -10,12 +10,18 @@ export class DetalheVendasService implements IService<DetalheVenda> {
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = `${environment.apiUrl}/usuarios`;
+  private apiUrl = `${environment.apiUrl}/detalheVendas`;
 
   public findAll(): Observable<Response> {
     return this.http.get(this.apiUrl)
     .map(resp => resp.json())
     .catch(this.handleError);
+  }
+
+  public findByIdCabecalhoVenda(id: string): Observable<Response> {
+    return this.http.get(`${this.apiUrl}/cabecalhoVenda/${id}`)
+      .map(resp => resp.json())
+      .catch(this.handleError);
   }
 
   public findById(id: string): Observable<Response> {

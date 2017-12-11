@@ -21,4 +21,16 @@ export class LocalStorageService {
   setLogin(login: string) {
     localStorage.setItem('userLogin', login);
   }
+
+  getIdUsuario(): string {
+    return localStorage.getItem('userId');
+  }
+
+  setIdUsuario(id: string) {
+    localStorage.setItem('userId', id);
+  }
+
+  clearAll(): void {
+    localStorage.clear();
+  }
 }

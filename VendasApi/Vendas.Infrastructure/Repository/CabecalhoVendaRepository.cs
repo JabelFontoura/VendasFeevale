@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Vendas.Infrastructure.Entities.Enums;
 using Vendas.Infrastructure.Entity;
 using Vendas.Infrastructure.Repository.Interfaces;
 
@@ -31,6 +32,16 @@ namespace Vendas.Infrastructure.Repository
         public CabecalhoVenda FindById(string id)
         {
             return HandleIncludes().FirstOrDefault(cv => cv.Id == id);
+        }
+
+        public CabecalhoVenda FindByIdUsuarioAndStatus(string id, Situacao situacao)
+        {
+            return HandleIncludes().FirstOrDefault(cv => cv.IdUsuario == id && cv.Situacao == situacao);
+        }
+
+        public IList<CabecalhoVenda> FindByIdUsuario(string id)
+        {
+            return HandleIncludes().Where(cv => cv.IdUsuario == id).ToList();
         }
 
         public CabecalhoVenda Save(CabecalhoVenda entity)

@@ -33,6 +33,11 @@ namespace Vendas.Infrastructure.Repository
             return HandleIncludes().FirstOrDefault(dv => dv.Id == id);
         }
 
+        public IList<DetalheVenda> FindByIdCabecalhoVenda(string id)
+        {
+            return HandleIncludes().Where(d => d.IdCabecalhoVenda == id).ToList();
+        }
+
         public DetalheVenda Save(DetalheVenda entity)
         {
             var detVenda = _dbContext.DetVenda.Add(entity);
@@ -54,6 +59,7 @@ namespace Vendas.Infrastructure.Repository
             return _dbContext.DetVenda
                 .Include(d => d.CabecalhoVenda)
                 .Include(d => d.Preco)
+                .OrderByDescending(p => p.Preco.Data)
                 .Include(d => d.Produto)
                 .ToList();
         }
